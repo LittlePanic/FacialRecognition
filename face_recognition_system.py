@@ -12,12 +12,12 @@ def execShellCommand(cmd):
  
  
 def main():
-    cmd = 'source ~/.profile' +'&&' + 'workon cv'  + '&&' + 'python face_recognition.py'
+    cmd = 'source ~/.profile' + '&&' + 'workon cv' + '&&' + 'python face_recognition.py'
     execShellCommand(cmd)
     
 if __name__ == "__main__":
     while(True):
-        choose = raw_input('choose')  #
+        choose = raw_input('choose')  #得到用户按下的按钮请求是什么，还要详细描述
         if choose == 'r':
             main()
         else:
