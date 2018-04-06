@@ -1,5 +1,6 @@
 import cv2
 import os
+from face_training import *
 
 cam = cv2.VideoCapture(0)
 cam.set(3, 640) # set video width
@@ -10,8 +11,23 @@ face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 class Dataset():
     def data_set(self):
         # For each person, enter one numeric face id
-        face_id = input('\n enter user id end press <return> ==>  ')
-
+        list = []
+        x = 0
+        name = input("please input data name:")
+        file = open("data.txt")
+        while 1:
+            x = x + 1
+            line = file.readline()
+            if not line:
+                break
+            list.append(line)  # do something
+        file.close()
+        list.append(name)
+        with open('data.txt', 'a', encoding='utf-8') as f:
+            f.write(str(list[int(x - 1)]) + '\n')
+            print('input success')
+            f.close()
+        face_id = x
         print("\n [INFO] Initializing face capture. Look the camera and wait ...")
         # Initialize individual sampling face count
         count = 0
@@ -42,5 +58,15 @@ class Dataset():
         print("\n [INFO] Exiting Program and cleanup stuff")
         cam.release()
         cv2.destroyAllWindows()
+
+if __name__=="__main()":
+    dataset = Dataset()
+    dataset.data_set()
+    train = Training()
+    train.training()
+    print("OK!!!")
+
+
+
 
 

@@ -22,9 +22,20 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 #iniciate id counter
 id = 0
 
-# names related to ids: example ==> Marcelo: id=1,  etc
-names = ['None', 'SunWei', 'Paula', 'Billy Herrington', 'Tui Shu', 'XiaoFang','SunWei','VanDarkholme','BananaKu','StrongHan','FuckingZhu','SaoXiang','BigAutumn','little yueyue','XuXiuFan','DaGe'] 
 
+list = []
+xid = 0
+#name = input("please input data name:")
+file = open("data.txt")
+while 1:
+  xid = xid + 1
+  line = file.readline()
+  if not line:
+      break
+  list.append(line) # do something
+file.close()
+
+names = list
 # Initialize and start realtime video capture
 cam = cv2.VideoCapture(0)
 cam.set(3, 640) # set video widht
@@ -61,7 +72,7 @@ while True:
         if (confidence < 100):
             if confidence < 60:
                 size = size + 1
-                name = names[id]
+                name = names[id][0:-1]
                 print(name)
             id = names[id]
             confidence = "  {0}%".format(round(100 - confidence))
